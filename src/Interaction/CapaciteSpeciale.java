@@ -1,4 +1,8 @@
+package Interaction;
+import Personnage.Modele.Ennemi;
+
 public class CapaciteSpeciale {
+
     private String nom;
     private boolean utilisee;
 
@@ -34,4 +38,6 @@ public class CapaciteSpeciale {
             return 0; // Aucun dégât infligé si la capacité a déjà été utilisée
         }
     }
+
+
 }

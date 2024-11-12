@@ -1,9 +1,12 @@
+package Personnage.Modele;
 import java.util.Random;
+
 public abstract class Personnage {
-    protected String nom;
-    protected int pv;
-    protected int forceAttaque;
-    protected boolean utilisee;
+
+    private String nom;
+    private int pv;
+    private int forceAttaque;
+    private boolean utilisee;
 
     public Personnage(String nom, int pv, int forceAttaque) {
         this.nom = nom;
@@ -38,4 +41,10 @@ public abstract class Personnage {
     public String getNom() {
         return nom;
     }
+
+    public int getForceAttaque() {
+        return forceAttaque;
+    }
+
+    
 }

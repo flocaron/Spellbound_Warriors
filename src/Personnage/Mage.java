@@ -1,4 +1,9 @@
+package Personnage;
+
+import Personnage.Modele.Ennemi;
+
 public class Mage extends Ennemi {
+
     private int mana;
 
     public Mage(String nom) {
@@ -9,9 +14,9 @@ public class Mage extends Ennemi {
     public String attaqueMagique() {
         if (mana >= 30) { // Coût de l'attaque magique
             mana -= 30; // Déduit le coût du mana
-            return nom + " utilise une attaque magique puissante! Dégâts infligés: " + (forceAttaque * 3);
+            return super.getNom() + " utilise une attaque magique puissante! Dégâts infligés: " + (super.getForceAttaque() * 3);
         } else {
-            return nom + " n'a pas assez de mana pour effectuer une attaque magique!";
+            return super.getNom() + " n'a pas assez de mana pour effectuer une attaque magique!";
         }
     }
 }

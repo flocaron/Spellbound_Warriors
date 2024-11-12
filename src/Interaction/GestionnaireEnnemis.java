@@ -1,7 +1,14 @@
+package Interaction;
 import java.util.ArrayList;
 import java.util.Random;
 
+import Personnage.Geant;
+import Personnage.GuerrierSquelette;
+import Personnage.Mage;
+import Personnage.Modele.Ennemi;
+
 public class GestionnaireEnnemis {
+    
     private ArrayList<Ennemi> ennemis;
 
     public GestionnaireEnnemis() {
@@ -17,4 +24,6 @@ public class GestionnaireEnnemis {
         int index = rand.nextInt(ennemis.size()); // Sélectionne un index aléatoire
         return ennemis.get(index); // Retourne l'ennemi à cet index
     }
+
+
 }

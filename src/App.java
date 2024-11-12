@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
-public class Main {
+import Interaction.GestionnaireEnnemis;
+import Personnage.Heros;
+import Personnage.Modele.Ennemi;
+
+public class App {
+
     public static void main(String[] args) {
         // Création du héros
         Heros eren = new Heros("Eren", 100, 15, "Attaque Éclair", "Guerrier");
@@ -38,10 +43,10 @@ public class Main {
                         // Attaque magique
                         String resultatMagique = eren.attaqueMagique();
                         System.out.println(resultatMagique);
-                        if (eren.mana >= 0) {
-                            System.out.println(ennemi.recevoirDegats(eren.forceAttaque * 2)); // Dégâts de l'attaque magique
+                        if (eren.getMana() >= 0) {
+                            System.out.println(ennemi.recevoirDegats(eren.getForceAttaque() * 2)); // Dégâts de l'attaque magique
                         }
-                        System.out.println("Mana actuel de " + eren.getNom() + ": " + eren.mana); // Affiche le mana après l'attaque magique
+                        System.out.println("Mana actuel de " + eren.getNom() + ": " + eren.getMana()); // Affiche le mana après l'attaque magique
                         break;
 
                     case 3:

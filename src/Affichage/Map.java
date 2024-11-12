@@ -1,4 +1,6 @@
+package Affichage;
 public class Map {
+    
     private String nom;
     private String debut;
     private String fin;
