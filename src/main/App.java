@@ -37,14 +37,13 @@ public class App {
                 int choix = scanner.nextInt();
 
                 switch (choix) {
-                    case 1:
+                    case 1 -> {
                         // Attaque physique
                         int degatsPhysiques = heros1.attaquePhysique();
                         System.out.println(heros1.getNom() + " attaque " + ennemi.getNom() + " et inflige " + degatsPhysiques + " points de dégâts!");
                         System.out.println(ennemi.recevoirDegats(degatsPhysiques));
-                        break;
-
-                    case 2:
+                    }
+                    case 2 -> {
                         // Attaque magique
                         String resultatMagique = heros1.attaqueMagique();
                         System.out.println(resultatMagique);
@@ -52,9 +51,8 @@ public class App {
                             System.out.println(ennemi.recevoirDegats(heros1.getForceAttaque() * 2)); // Dégâts de l'attaque magique
                         }
                         System.out.println("Mana actuel de " + heros1.getNom() + ": " + heros1.getMana()); // Affiche le mana après l'attaque magique
-                        break;
-
-                    case 3:
+                    }
+                    case 3 -> {
                         // Utiliser capacité spéciale
                         if (!capaciteUtilisee) { // Vérifie si la capacité n'a pas été utilisée
                             System.out.println(heros1.utiliserCapacite());
@@ -62,10 +60,10 @@ public class App {
                         } else {
                             System.out.println("Vous avez déjà utilisé votre capacité spéciale!");
                         }
-                        break;
-
-                    default:
+                    }
+                    default -> {
                         System.out.println("Choix invalide. Veuillez réessayer.");
+                    }
                 }
 
                 // Vérification si l'ennemi est toujours vivant

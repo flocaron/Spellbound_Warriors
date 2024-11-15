@@ -1,65 +1,19 @@
 
+
+
+import Interaction.Action;
+import Interaction.ActionPhysique;
+import Interaction.ActionMagique;
+import Interaction.ActionSpeciale;
+
 import Interaction.GestionnaireEnnemis;
 import Personnage.Heros;
 import Personnage.Modele.Ennemi;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
-// Superclasse pour les actions
-abstract class Action {
-    String nom;
-
-    public Action(String nom) {
-        this.nom = nom;
-    }
-
-    public abstract void executer(Heros heros, Ennemi ennemi);
-}
-
-// Sous-classe pour l'Action Physique
-class ActionPhysique extends Action {
-    public ActionPhysique() {
-        super("Attaque Physique");
-    }
-
-    @Override
-    public void executer(Heros heros, Ennemi ennemi) {
-        int degatsPhysiques = heros.attaquePhysique();
-        System.out.println(heros.getNom() + " attaque " + ennemi.getNom() + " et inflige " + degatsPhysiques + " points de dégâts!");
-        System.out.println(ennemi.recevoirDegats(degatsPhysiques));
-    }
-}
-
-// Sous-classe pour l'Action Magique
-class ActionMagique extends Action {
-    public ActionMagique() {
-        super("Attaque Magique");
-    }
-
-    @Override
-    public void executer(Heros heros, Ennemi ennemi) {
-        String resultatMagique = heros.attaqueMagique();
-        System.out.println(resultatMagique);
-        if (heros.getMana() >= 0) {
-            System.out.println(ennemi.recevoirDegats(heros.getForceAttaque() * 2)); // Dégâts de l'attaque magique
-        }
-        System.out.println("Mana actuel de " + heros.getNom() + ": " + heros.getMana());
-    }
-}
-
-// Sous-classe pour l'Action Spéciale
-class ActionSpeciale extends Action {
-    public ActionSpeciale() {
-        super("Capacité Spéciale");
-    }
-
-    @Override
-    public void executer(Heros heros, Ennemi ennemi) {
-        System.out.println(heros.utiliserCapacite());
-    }
-}
 
 // Classe principale
 public class AppGraphique {
@@ -93,9 +47,9 @@ public class AppGraphique {
             frame.setLayout(new FlowLayout());
 
             // Créer des boutons pour chaque action
-            JButton boutonPhysique = new JButton(actionPhysique.nom);
-            JButton boutonMagique = new JButton(actionMagique.nom);
-            JButton boutonSpeciale = new JButton(actionSpeciale.nom);
+            JButton boutonPhysique = new JButton(actionPhysique.getNom());
+            JButton boutonMagique = new JButton(actionMagique.getNom());
+            JButton boutonSpeciale = new JButton(actionSpeciale.getNom());
 
             // Ajouter des écouteurs d'action aux boutons
             boutonPhysique.addActionListener(new ActionListener() {
@@ -119,7 +73,7 @@ public class AppGraphique {
             boutonSpeciale.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    actionSpeciale .executer(heros1, ennemi);
+                    actionSpeciale.executer(heros1, ennemi);
                     verifierEtat(heros1, ennemi);
                     frame.dispose(); // Fermer la fenêtre après l'action
                 }

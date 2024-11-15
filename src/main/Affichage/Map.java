@@ -1,4 +1,5 @@
 package Affichage;
+
 public class Map {
     
     private String nom;

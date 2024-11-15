@@ -1,4 +1,5 @@
 package Interaction;
+
 import Personnage.Modele.Ennemi;
 
 public class CapaciteSpeciale {

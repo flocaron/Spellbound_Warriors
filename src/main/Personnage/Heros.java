@@ -39,7 +39,7 @@ public class Heros extends Personnage {
 
     public String attaqueMagique() {
         if (mana >= 20) { // Coût de l'attaque magique
-           mana -= 20; // Déduit le coût du mana
+            mana -= 20; // Déduit le coût du mana
             attaquesPhysiquesEffectuees = 0; // Réinitialise le compteur d'attaques physiques
             return super.getNom() + " utilise une attaque magique! Dégâts infligés: " + ((getForceAttaque()) + 10* 2); // Dégâts de l'attaque magique
         } else {
