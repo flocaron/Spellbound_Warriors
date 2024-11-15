@@ -1,14 +1,16 @@
-import java.util.Scanner;
 
 import Interaction.GestionnaireEnnemis;
 import Personnage.Heros;
 import Personnage.Modele.Ennemi;
+import java.util.Scanner;
 
 public class App {
-
     public static void main(String[] args) {
+        System.out.print("Decruyenaere Hugo ");
+        System.out.println(" Caron Florimond");
+        
         // Création du héros
-        Heros eren = new Heros("Eren", 100, 15, "Attaque Éclair", "Guerrier");
+        Heros heros1 = new Heros("Sunraku", 250, 25, "Attaque Éclair", "Guerrier");
 
         // Création du gestionnaire d'ennemis
         GestionnaireEnnemis gestionnaire = new GestionnaireEnnemis();
@@ -17,41 +19,49 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         boolean continuer = true;
         int ennemisVaincus = 0; // Compteur d'ennemis vaincus
+        boolean capaciteUtilisee = false; // Suivre si la capacité spéciale a été utilisée
 
-        while (continuer && eren.estVivant()) {
+        while (continuer && heros1.estVivant()) {
             // Génération d'un ennemi aléatoire
             Ennemi ennemi = gestionnaire.obtenirEnnemiAleatoire();
             System.out.println("Un nouvel ennemi apparaît: " + ennemi.getNom());
 
-            while (ennemi.estVivant() && eren.estVivant()) {
+            while (ennemi.estVivant() && heros1.estVivant()) {
                 System.out.println("\nQue voulez-vous faire?");
-                System.out.println("1. Attaque Physique");
-                System.out.println("2. Attaque Magique");
-                System.out.println("3. Utiliser capacité spéciale");
-                System.out.print("Choix: ");
+                System.out.print("1. Attaque Physique ");
+                System.out.print("2. Attaque Magique ");
+                if (!capaciteUtilisee) { // Affiche le choix 3 seulement si la capacité n'a pas été utilisée
+                    System.out.print("3. Utiliser capacité spéciale ");
+                }
+                System.out.print("\nChoix: ");
                 int choix = scanner.nextInt();
 
                 switch (choix) {
                     case 1:
                         // Attaque physique
-                        int degatsPhysiques = eren.attaquePhysique();
-                        System.out.println(eren.getNom() + " attaque " + ennemi.getNom() + " et inflige " + degatsPhysiques + " points de dégâts!");
+                        int degatsPhysiques = heros1.attaquePhysique();
+                        System.out.println(heros1.getNom() + " attaque " + ennemi.getNom() + " et inflige " + degatsPhysiques + " points de dégâts!");
                         System.out.println(ennemi.recevoirDegats(degatsPhysiques));
                         break;
 
                     case 2:
                         // Attaque magique
-                        String resultatMagique = eren.attaqueMagique();
+                        String resultatMagique = heros1.attaqueMagique();
                         System.out.println(resultatMagique);
-                        if (eren.getMana() >= 0) {
-                            System.out.println(ennemi.recevoirDegats(eren.getForceAttaque() * 2)); // Dégâts de l'attaque magique
+                        if (heros1.getMana() >= 0) {
+                            System.out.println(ennemi.recevoirDegats(heros1.getForceAttaque() * 2)); // Dégâts de l'attaque magique
                         }
-                        System.out.println("Mana actuel de " + eren.getNom() + ": " + eren.getMana()); // Affiche le mana après l'attaque magique
+                        System.out.println("Mana actuel de " + heros1.getNom() + ": " + heros1.getMana()); // Affiche le mana après l'attaque magique
                         break;
 
                     case 3:
                         // Utiliser capacité spéciale
-                        System.out.println(eren.utiliserCapacite());
+                        if (!capaciteUtilisee) { // Vérifie si la capacité n'a pas été utilisée
+                            System.out.println(heros1.utiliserCapacite());
+                            capaciteUtilisee = true; // Marque la capacité comme utilisée
+                        } else {
+                            System.out.println("Vous avez déjà utilisé votre capacité spéciale!");
+                        }
                         break;
 
                     default:
@@ -62,8 +72,8 @@ public class App {
                 if (ennemi.estVivant()) {
                     // L'ennemi attaque
                     int degatsEnnemi = ennemi.attaquer();
-                    System.out.println(ennemi.getNom() + " attaque " + eren.getNom() + " et inflige " + degatsEnnemi + " points de dégâts!");
-                    System.out.println(eren.recevoirDegats(degatsEnnemi));
+                    System.out.println(ennemi.getNom() + " attaque " + heros1.getNom() + " et inflige " + degatsEnnemi + " points de dégâts!");
+                    System.out.println(heros1.recevoirDegats(degatsEnnemi));
                 } else {
                     System.out.println(ennemi.getNom() + " a été vaincu!");
                     ennemisVaincus++; // Incrémente le compteur d'ennemis vaincus
@@ -72,8 +82,8 @@ public class App {
             }
 
             // Vérification si le héros est toujours vivant
-            if (!eren.estVivant()) {
-                System.out.println(eren.getNom() + " a été vaincu!");
+            if (!heros1.estVivant()) {
+                System.out.println(heros1.getNom() + " a été vaincu!");
                 continuer = false;
             }
 

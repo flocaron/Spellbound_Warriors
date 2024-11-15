@@ -38,6 +38,5 @@ public class CapaciteSpeciale {
             return 0; // Aucun dégât infligé si la capacité a déjà été utilisée
         }
     }
-
-
+    
 }

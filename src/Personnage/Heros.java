@@ -41,7 +41,7 @@ public class Heros extends Personnage {
         if (mana >= 20) { // Coût de l'attaque magique
            mana -= 20; // Déduit le coût du mana
             attaquesPhysiquesEffectuees = 0; // Réinitialise le compteur d'attaques physiques
-            return super.getNom() + " utilise une attaque magique! Dégâts infligés: " + ((getForceAttaque()) + 1* 2); // Dégâts de l'attaque magique
+            return super.getNom() + " utilise une attaque magique! Dégâts infligés: " + ((getForceAttaque()) + 10* 2); // Dégâts de l'attaque magique
         } else {
             return super.getNom() + " n'a pas assez de mana pour effectuer une attaque magique!";
         }
