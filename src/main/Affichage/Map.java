@@ -29,4 +29,5 @@ public class Map {
     public int getLongueur() {
         return longueur;
     }
+
 }
