@@ -26,7 +26,7 @@ public class App {
         // scan.close();
 
         Carte carte = new Carte("Marché", "Port Royal", Constante.NOMBRE_SALLE, Constante.ANIMATION_TIME, Constante.MAP_SIZE_I, Constante.MAP_SIZE_J);
-        Heros modeleHeros = new Heros("JackSparrow", 100, 20, "Pourparler");
+        Heros modeleHeros = new Heros("JackSparrow", 100, 20, "boule de feu");
 
         Jeu jeu = new Jeu(modeleHeros, carte, Constante.MIN_ENNEMI_MAP, Constante.MAX_ENNEMI_MAP);
 

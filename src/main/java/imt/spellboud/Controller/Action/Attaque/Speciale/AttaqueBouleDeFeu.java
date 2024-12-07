@@ -11,7 +11,7 @@ public class AttaqueBouleDeFeu extends AttaqueSpeciale {
     private int degat;
 
     public AttaqueBouleDeFeu() {
-        super("Boule de Feu");
+        super("boule de feu");
         degat = 200;
     }
 

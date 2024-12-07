@@ -30,7 +30,7 @@ public class Jeu {
         this.max = max;
     }
 
-    public void jouerPartie() {        
+    public boolean jouerPartie() {        
         Scanner scan = new Scanner(System.in);
 
         boolean carteFinie = false;
@@ -70,51 +70,68 @@ public class Jeu {
 
                 // tant que le joueurs a des attaques restantes && qu'il n'a pas arreté d'attaquer && qu'il a des attaques possibles
                 while ( attaqueN < nbAttaque && !passerTour && attaqueDisponibles) {
-                    afficheGeneral();
-
+                    
                     boolean attaqueReussie = false;
                     ArrayList<String> attaquesDisponibles = controllerHeros.attaqueDisponible(controllerEnnemis);
-                    if (attaquesDisponibles.size() == 1) {
-                        attaqueDisponibles = false;
+
+                    attaqueDisponibles = attaquesDisponibles.size() > 1;
+                    if (!attaqueDisponibles && !ennemisMort()) {
                         controllerHeros.afficheAucuneAttaqueDisponible();
                     } else {
-                        while (!attaqueReussie) {
-                            controllerHeros.afficheChoixJoueurAttaque(attaqueN + 1, nbAttaque, controllerEnnemis);
-                            choixAttaque = scan.nextLine();
+                        afficheGeneral();
+                    }
 
-                            if (attaquesDisponibles.contains(choixAttaque)) {
-                                
-                                choixId = 0;
-                                if (!choixAttaque.equals("speciale") && !choixAttaque.equals("N")) {
-                                    affichePromptId();
-                                    choixId = scan.nextInt();
-                                }
-                        
-                                switch(controllerHeros.gererAttaque(choixAttaque, controllerEnnemis, choixId)) {
-                                    case 0 -> {
-                                        attaqueReussie = false;
-                                        passerTour = false;
-                                    }
-                                    case 1 -> {
-                                        attaqueReussie = true;
-                                        passerTour = false;
-                                    }
-                                    case 2 -> {
-                                        attaqueReussie = true;
-                                        passerTour = true;
-                                    }
-                                }
+                    while (!attaqueReussie && attaqueDisponibles) {
+                        controllerHeros.afficheChoixJoueurAttaque(attaqueN + 1, nbAttaque, controllerEnnemis);
+                        choixAttaque = scan.nextLine();                        
 
-                                if (!attaqueReussie) {
-                                    controllerHeros.mauvaisChoix();
+                        if (attaquesDisponibles.contains(choixAttaque)) {
+                            
+                            choixId = 0;
+                            if (!choixAttaque.equals(controllerHeros.getAttaqueSpeciale().getNom()) && !choixAttaque.equals("N")) {
+                                boolean saisieValide = false;
+                                while (!saisieValide) {
+                                    try {
+                                        affichePromptId();
+                                        choixId = Integer.parseInt(scan.nextLine());
+                                        saisieValide = true;
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Veuillez entrer un nombre valide.");
+                                    }
                                 }
-                            } else {
+                            }
+                    
+                            switch(controllerHeros.gererAttaque(choixAttaque, controllerEnnemis, choixId)) {
+                                case 0 -> {
+                                    attaqueReussie = false;
+                                    passerTour = false;
+                                }
+                                case 1 -> {
+                                    attaqueReussie = true;
+                                    passerTour = false;
+                                }
+                                case 2 -> {
+                                    attaqueReussie = true;
+                                    passerTour = true;
+                                }
+                            }
+
+                            if (!attaqueReussie) {
                                 controllerHeros.mauvaisChoix();
                             }
+                        } else {
+                            controllerHeros.mauvaisChoix();
                         }
 
-                        attaqueN++;
+                        attaqueDisponibles = attaquesDisponibles.size() > 1;
+                        if (!attaqueDisponibles && !ennemisMort()) {
+                            controllerHeros.afficheAucuneAttaqueDisponible();
+                        }
+
                     }
+
+                    attaqueN++;
+                
 
                 }
                 
@@ -129,6 +146,7 @@ public class Jeu {
 
         scan.close();
 
+        return controllerHeros.estVivant();
     }
 
     public void initSalle() {
@@ -214,13 +232,6 @@ public class Jeu {
         controllerHeros.afficheStatHeros();
     }
 
-    // private void afficheStatEnnemis() {
-    //     controllerEnnemis.forEach(controllerEnnemi -> {
-    //         System.out.print(controllerEnnemi.afficheStatEnnemi());
-    //     });
-    //     System.out.println();
-    // }
-
     private void afficheIdEnnemis() {
         controllerEnnemis.forEach(controllerEnnemi -> {
             if (controllerEnnemi.estVivant()) System.out.print(controllerEnnemi.afficheIdEnnemi());
@@ -249,6 +260,19 @@ public class Jeu {
     // - nb ennemis vaincu
     // - stats deplacement/attaques
 
-    // TODO FAIRE EN SORTE QUE SI LES TOUS LES ENNEMIS SONT MORT AU MILLIEU D UN TOUR D ATTAQUE STOP LE TOUR SANS ATTEINDRE LA FIN DES ATTAQUES RESTANTES
+    // TODO ajouter info
+    // comment attaquer/se deplacer
+    // fonctionnement du jeu
+    // a qui correspond chaque texture
+
+    // pour tests
+
+    public ControllerHeros getControllerHeros() {
+        return controllerHeros;
+    }
+
+    public ArrayList<ControllerEnnemi> getControllerEnnemis() {
+        return controllerEnnemis;
+    }
 
 }

@@ -26,6 +26,13 @@ public class ControllerHeros extends Controller {
         this.modele = modele;
     }
 
+    @Override
+    public void initPosition() {
+        getVue().setStart_i(0);
+        getVue().setStart_j(0);
+        super.initPosition();
+    }
+
     public void initDeplacements() {
         super.getDeplacements().put("bas", new DeplacementBas());
         super.getDeplacements().put("droite", new DeplacementDroite());
@@ -35,7 +42,10 @@ public class ControllerHeros extends Controller {
     }
 
     public void initAttaques() {
-        attaqueSpeciale = new AttaqueBouleDeFeu();
+        attaqueSpeciale = switch(modele.getNomCapaciteSpeciale()) {
+            case "boule de feu" -> new AttaqueBouleDeFeu();
+            default -> null;
+        };
         super.getAttaques().put("magique", new AttaqueMagique());
         super.getAttaques().put("physique", new AttaquePhysique());
         super.getAttaques().put("N", new AttaqueAnnule());
@@ -63,7 +73,7 @@ public class ControllerHeros extends Controller {
         if (choixAttaque.equals("N")) return 2;
         
         // Gérer les attaques spéciales
-        if (choixAttaque.equals("speciale")) {
+        if (choixAttaque.equals(attaqueSpeciale.getNom())) {
             return attaqueSpeciale.attaqueSpeciale(modele, getVue(), ennemis) ? 1 : 0;
         }
     
@@ -95,7 +105,7 @@ public class ControllerHeros extends Controller {
 
     public ArrayList<String> attaqueDisponible(ArrayList<ControllerEnnemi> controllerEnnemis) {
         ArrayList<String> attaquesDisponibles = new ArrayList<>();
-        if (!attaqueSpeciale.getUtilisee()) attaquesDisponibles.add("speciale");
+        if (!attaqueSpeciale.getUtilisee()) attaquesDisponibles.add(attaqueSpeciale.getNom());
         getAttaques().forEach((nom, attaque) -> {
             if (auMoinsAPorte(attaque, controllerEnnemis)) attaquesDisponibles.add(nom);
         });
@@ -117,7 +127,7 @@ public class ControllerHeros extends Controller {
     }
 
     public void votreTour() {
-        System.out.println("C'est vote tour :");
+        System.out.println("C'est à votre tour :");
     }
 
     public void mauvaisChoix() {
@@ -136,6 +146,8 @@ public class ControllerHeros extends Controller {
         System.out.println(modele.getNom() + " n'a pas d'attaques utilisables.");
     }
 
-
+    public AttaqueSpeciale getAttaqueSpeciale() {
+        return attaqueSpeciale;
+    }
 
 }
