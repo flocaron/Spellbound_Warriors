@@ -19,6 +19,8 @@ public class Jeu {
     private int min;
     private int max;
 
+    private int ennemisVaincus;
+
     public Jeu(Heros heros, Carte carte, int min, int max) {
         this.carte = carte;
         controllerHeros = new ControllerHeros(carte, heros);
@@ -28,6 +30,8 @@ public class Jeu {
 
         this.min = min;
         this.max = max;
+        
+        ennemisVaincus = 0;
     }
 
     public boolean jouerPartie() {        
@@ -62,6 +66,8 @@ public class Jeu {
                 int nbAttaque = genereNombreAttaque();
                 int attaqueN = 0;
 
+                int nbEnnemisMort = nbEnnemisMort();
+
                 String choixAttaque = "N";
                 int choixId = - 1;
 
@@ -74,8 +80,8 @@ public class Jeu {
                     boolean attaqueReussie = false;
                     ArrayList<String> attaquesDisponibles = controllerHeros.attaqueDisponible(controllerEnnemis);
 
-                    attaqueDisponibles = attaquesDisponibles.size() > 1;
-                    if (!attaqueDisponibles && !ennemisMort()) {
+                    attaqueDisponibles = attaquesDisponibles.size() > 1 && !ennemisMort();
+                    if (!attaqueDisponibles) {
                         controllerHeros.afficheAucuneAttaqueDisponible();
                     } else {
                         afficheGeneral();
@@ -123,8 +129,8 @@ public class Jeu {
                             controllerHeros.mauvaisChoix();
                         }
 
-                        attaqueDisponibles = attaquesDisponibles.size() > 1;
-                        if (!attaqueDisponibles && !ennemisMort()) {
+                        attaqueDisponibles = attaquesDisponibles.size() > 1 && !ennemisMort();
+                        if (!attaqueDisponibles) {
                             controllerHeros.afficheAucuneAttaqueDisponible();
                         }
 
@@ -134,6 +140,8 @@ public class Jeu {
                 
 
                 }
+
+                ennemisVaincus += nbEnnemisMort() - nbEnnemisMort;
                 
                 // joue les ennemis plus lent que le heros
                 jouerEnnemisNonPriorise();
@@ -217,13 +225,16 @@ public class Jeu {
         return random.nextInt(1, Constante.NOMBRE_ATTAQUE_MAX + 1);
     }
 
-    private boolean ennemisMort() {
+    private int nbEnnemisMort() {
+        int ennemisMorts = 0;
         for (ControllerEnnemi controllerEnnemi : controllerEnnemis) {
-            if (controllerEnnemi.estVivant()) {
-                return false;
-            }
+            if (!controllerEnnemi.estVivant()) ennemisMorts++;
         }
-        return true;
+        return ennemisMorts;
+    }
+
+    private boolean ennemisMort() {
+        return nbEnnemisMort() == controllerEnnemis.size();
     }
 
     private void afficheGeneral() {
@@ -241,6 +252,10 @@ public class Jeu {
 
     private void affichePromptId() {
         System.out.print("Id> ");
+    }
+    
+    public int getEnnemisVaincus() {
+        return ennemisVaincus;
     }
     
     // TODO ajouter une attaque speciale soin
@@ -274,5 +289,6 @@ public class Jeu {
     public ArrayList<ControllerEnnemi> getControllerEnnemis() {
         return controllerEnnemis;
     }
+
 
 }

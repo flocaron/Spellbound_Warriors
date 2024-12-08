@@ -30,7 +30,14 @@ public class App {
 
         Jeu jeu = new Jeu(modeleHeros, carte, Constante.MIN_ENNEMI_MAP, Constante.MAX_ENNEMI_MAP);
 
-        jeu.jouerPartie();
+
+        if (jeu.jouerPartie()) {
+            System.out.println("Bravo vous avez gagné !!");
+        } else {
+            System.out.println("Dommage vous avez perdu !");
+        }
+
+        System.out.println("Vous avez vaincu " + jeu.getEnnemisVaincus() + " ennemis");
 
 
     }

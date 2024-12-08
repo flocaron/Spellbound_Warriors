@@ -50,7 +50,7 @@ public class ControllerEnnemi extends Controller {
     }
 
     public String afficheIdEnnemi() {
-        return "<" + modele.getId() + ": " + modele.getNom() + " - " + modele.getPv() + "> ";
+        return "<" + modele.getId() + ": " + modele.getNom() + " - " + modele.getTexture() + " - " + modele.getPv() + "> ";
     }
 
     public boolean getPriorise() {
