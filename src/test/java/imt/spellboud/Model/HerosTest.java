@@ -16,7 +16,7 @@ public class HerosTest {
 
     @BeforeAll
 	public static void init(){
-		heros = new Heros("test1", 250, 25, "Boule de feu");
+		heros = new Heros("test1", 250, 25, "boule de feu");
         ennemi1 = new Mage(-1, "Mage Noir");
 	}
 

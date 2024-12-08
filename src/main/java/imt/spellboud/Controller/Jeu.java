@@ -233,7 +233,7 @@ public class Jeu {
         return ennemisMorts;
     }
 
-    private boolean ennemisMort() {
+    public boolean ennemisMort() {
         return nbEnnemisMort() == controllerEnnemis.size();
     }
 
@@ -263,22 +263,16 @@ public class Jeu {
     // TODO ajouter un deplacement rapide (de 5 cases par exemples)
 
     // TODO ajouter logs
-    // TODO ajouter tests
     // TODO ajouter commentaire
 
-    // TODO cretation Map / Heros
+    // TODO creation Map / Heros
     // TODO creation Attaque Speciale
 
-    // TODO gerer fin de partie
-    // - victoire/defaite
-    // - message
-    // - nb ennemis vaincu
-    // - stats deplacement/attaques
+    // TODO stats deplacement/attaques
 
     // TODO ajouter info
     // comment attaquer/se deplacer
     // fonctionnement du jeu
-    // a qui correspond chaque texture
 
     // pour tests
 

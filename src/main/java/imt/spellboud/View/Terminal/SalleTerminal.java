@@ -136,6 +136,13 @@ public class SalleTerminal implements Salle {
         map[e.getStart_i()][e.getStart_j()] = ' ';       
     }
 
+    // pour les test 
+
+    @Override
+    public void placerVue(Entite vue) {
+        map[vue.getStart_i()][vue.getStart_j()] = vue.getTexture();
+    }
+
 }    
 
 

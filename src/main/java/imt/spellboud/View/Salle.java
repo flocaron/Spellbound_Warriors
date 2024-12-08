@@ -19,4 +19,7 @@ public interface Salle {
 
     void efface(Entite e);
 
+    // pour les tests
+    void placerVue(Entite vue);
+
 }
