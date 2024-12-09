@@ -270,7 +270,7 @@ public class Jeu {
 
     // TODO stats deplacement/attaques
 
-    // TODO ajouter info
+    // TODO ajouter info -> singleton logger ?
     // comment attaquer/se deplacer
     // fonctionnement du jeu
 

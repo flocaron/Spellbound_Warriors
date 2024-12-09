@@ -15,4 +15,6 @@ public class Constante {
     public static final int NOMBRE_ATTAQUE_MAX = 5;
     
     public static final int NOMBRE_SALLE = 2;
+
+    public static final String FICHIER_LOGS = "/Logs/partie_1.log";
 }

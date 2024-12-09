@@ -29,22 +29,22 @@ public class ControllerHerosTest {
 
     @Test
     public void testDeplacementValide() {
-        assertEquals(0, controllerHeros.getVue().getStart_i()); // Vérifie que la position a changé
-        assertEquals(0, controllerHeros.getVue().getStart_j()); // Vérifie que la position a changé
+        assertEquals(0, controllerHeros.getVue().getStart_i());
+        assertEquals(0, controllerHeros.getVue().getStart_j());
 
         controllerHeros.deplacer("bas");
-        assertEquals(1, controllerHeros.getVue().getStart_i()); // Vérifie que la position a changé
-        assertEquals(0, controllerHeros.getVue().getStart_j()); // Vérifie que la position a changé
+        assertEquals(1, controllerHeros.getVue().getStart_i());
+        assertEquals(0, controllerHeros.getVue().getStart_j());
     }
 
     @Test
     public void testDeplacementInvalide() {
-        assertEquals(0, controllerHeros.getVue().getStart_i()); // Vérifie que la position a changé
-        assertEquals(0, controllerHeros.getVue().getStart_j()); // Vérifie que la position a changé
+        assertEquals(0, controllerHeros.getVue().getStart_i());
+        assertEquals(0, controllerHeros.getVue().getStart_j());
 
         controllerHeros.deplacer("gauche");
-        assertEquals(0, controllerHeros.getVue().getStart_i()); // Vérifie que la position a changé
-        assertEquals(0, controllerHeros.getVue().getStart_j()); // Vérifie que la position a changé
+        assertEquals(0, controllerHeros.getVue().getStart_i());
+        assertEquals(0, controllerHeros.getVue().getStart_j());
     }
 
 }
