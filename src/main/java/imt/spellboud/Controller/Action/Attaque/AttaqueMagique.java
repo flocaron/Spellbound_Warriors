@@ -25,8 +25,9 @@ public class AttaqueMagique extends Attaque {
             personnage.acceptManaVisiteur(manaVisitor);
             if (manaVisitor.getMana() >= cout) {
                 personnage.utiliserMana(cout);
-                cible.recevoirDegats(personnage.getForceAttaque() * 3);
-                System.out.println(cible.getNom() + " reçoit " + personnage.getForceAttaque() * random.nextInt(3, 6) + " points de dégâts"); 
+                int nbDegat = personnage.getForceAttaque() * random.nextInt(3, 6);
+                cible.recevoirDegats(nbDegat);
+                System.out.println(cible.getNom() + " reçoit " + nbDegat + " points de dégâts"); 
                 if (!cible.estVivant()) {
                     System.out.println(cible.getNom() + " est mort !");
                     vueCible.efface();
